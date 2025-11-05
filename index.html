@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outils IA pour l'enseignement supérieur - Rochane Kherbouche</title>
+    <title>IA Générative en Pédagogie - Webinaire</title>
     <style>
         * {
             margin: 0;
@@ -12,457 +12,885 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow: hidden;
-            height: 100vh;
         }
 
-        .presentation-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            padding: 1rem;
-            gap: 1rem;
-        }
-
-        .slide-wrapper {
-            flex: 1;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            overflow: hidden;
+        .presentation {
             position: relative;
+            width: 100vw;
+            height: 100vh;
         }
 
         .slide {
-            display: none;
+            position: absolute;
+            width: 100%;
             height: 100%;
-            padding: 3rem;
-            overflow-y: auto;
+            display: none;
+            padding: 60px 80px;
+            background: white;
         }
 
         .slide.active {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.5s ease;
         }
 
-        .slide-header {
-            margin-bottom: 2rem;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .slide-section {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #4f46e5;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-
-        .slide-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 0.5rem;
-        }
-
-        .slide-subtitle {
-            font-size: 1.25rem;
-            color: #6b7280;
-            font-style: italic;
-        }
-
-        .slide-timing {
-            font-size: 0.75rem;
-            color: #9ca3af;
-            margin-top: 0.5rem;
-        }
-
-        .slide-content {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .slide-counter {
+        .slide-number {
             position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            font-size: 0.875rem;
-            color: #9ca3af;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #666;
         }
 
         .navigation {
-            background: #16213e;
-            padding: 1rem;
-            border-radius: 12px;
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            gap: 20px;
+            z-index: 1000;
         }
 
-        .nav-button {
-            background: #4f46e5;
-            color: white;
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.9);
             border: none;
-            padding: 0.75rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #667eea;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #764ba2;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin: 25px 0 15px 0;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-size: 1.2em;
+            color: #888;
+            margin-top: 40px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        li {
+            font-size: 1.3em;
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 20px 0;
             border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .nav-button:hover:not(:disabled) {
-            background: #4338ca;
-        }
-
-        .nav-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .progress-dots {
-            display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
-            max-width: 40rem;
-            padding: 0.5rem 0;
-        }
-
-        .progress-dot {
-            width: 0.5rem;
-            height: 0.5rem;
-            border-radius: 9999px;
-            background: #4b5563;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .progress-dot:hover {
-            background: #6b7280;
-        }
-
-        .progress-dot.active {
-            background: #4f46e5;
-            width: 2rem;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .grid-3 {
+        .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 25px;
+            margin: 30px 0;
         }
 
         .card {
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 2px solid;
-        }
-
-        .card-red { background: #fef2f2; border-color: #fca5a5; }
-        .card-orange { background: #fff7ed; border-color: #fdba74; }
-        .card-blue { background: #eff6ff; border-color: #93c5fd; }
-        .card-green { background: #f0fdf4; border-color: #86efac; }
-        .card-purple { background: #faf5ff; border-color: #d8b4fe; }
-        .card-yellow { background: #fefce8; border-color: #fde047; }
-        .card-indigo { background: #eef2ff; border-color: #a5b4fc; }
-
-        .icon-large {
-            font-size: 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
-            margin: 1rem 0;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .text-center { text-align: center; }
-        .font-bold { font-weight: 700; }
-        .font-semibold { font-weight: 600; }
-        .text-sm { font-size: 0.875rem; }
-        .text-xs { font-size: 0.75rem; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mt-4 { margin-top: 1rem; }
-        .p-4 { padding: 1rem; }
+        .card:hover {
+            transform: translateY(-10px);
+        }
 
-        @media (max-width: 768px) {
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .slide {
-                padding: 1.5rem;
-            }
-            
-            .slide-title {
-                font-size: 1.75rem;
-            }
+        .card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .card p {
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item strong {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .comparison-box {
+            padding: 25px;
+            border-radius: 12px;
+            border: 3px solid;
+        }
+
+        .comparison-box.bad {
+            background: #ffe5e5;
+            border-color: #dc3545;
+        }
+
+        .comparison-box.good {
+            background: #e8f5e8;
+            border-color: #28a745;
+        }
+
+        .comparison-box h4 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .comparison-box.bad h4 {
+            color: #dc3545;
+        }
+
+        .comparison-box.good h4 {
+            color: #28a745;
+        }
+
+        .big-number {
+            font-size: 5em;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .tool-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .tool-section h2 {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .demo-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid white;
+        }
+
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <div class="slide-wrapper" id="slideWrapper">
-            <!-- Les slides seront générées par JavaScript -->
-            <div class="slide-counter" id="slideCounter">1 / 44</div>
+    <div class="timer">00:00</div>
+    
+    <div class="presentation">
+        <!-- Slide 1: Titre -->
+        <div class="slide active">
+            <h1>IA Générative en Pédagogie</h1>
+            <p class="subtitle">Créer vos contenus pédagogiques avec l'IA</p>
+            <div class="box">
+                <p style="font-size: 1.3em; color: #333;">90 minutes de démonstrations concrètes</p>
+                <p style="font-size: 1.1em; color: #666; margin-top: 10px;">Pas de théorie abstraite. Des outils utilisables dès demain.</p>
+            </div>
+            <p class="author">Rochane Kherbouche<br>Technopédagogue, Université de Lille</p>
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
+                <p style="font-size: 0.9em; color: #555; line-height: 1.6;">
+                    <strong>Transparence :</strong> Cette présentation a été créée avec l'assistance de Claude (IA d'Anthropic). 
+                    Le contenu a été travaillé avec l'IA à environ 30%, suivi d'une révision humaine complète. 
+                    La responsabilité des propos tenus dans cette présentation reste entièrement celle de l'auteur·e humain·e.
+                </p>
+            </div>
+            <div class="slide-number">1/25</div>
         </div>
 
-        <div class="navigation">
-            <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            </button>
+        <!-- Slide 2: Programme -->
+        <div class="slide">
+            <h2>Programme</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>10 min</strong> - Pourquoi l'IA change la donne
+                </div>
+                <div class="timeline-item">
+                    <strong>60 min</strong> - Démonstrations de 3 outils
+                </div>
+                <div class="timeline-item">
+                    <strong>20 min</strong> - Synthèse et ouverture
+                </div>
+            </div>
+            <div class="box">
+                <p style="font-size: 1.3em; color: #667eea; text-align: center;">
+                    Question centrale : Comment utiliser l'IA pour gagner du temps ET améliorer la qualité ?
+                </p>
+            </div>
+            <div class="slide-number">2/25</div>
+        </div>
 
-            <div class="progress-dots" id="progressDots"></div>
+        <!-- Slide 3: Trois constats -->
+        <div class="slide">
+            <h2>Trois Constats</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Manque de temps</h3>
+                    <p>Créer des supports de qualité prend des heures. L'IA peut accélérer les tâches répétitives.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Étudiant·es déjà utilisateur·ices</h3>
+                    <p>200M d'utilisateur·ices ChatGPT. Vos étudiant·es l'utilisent. Autant leur montrer comment bien l'utiliser.</p>
+                </div>
+                <div class="card">
+                    <h3>3. IA non magique</h3>
+                    <p>Elle fait des erreurs. Elle invente. Il faut savoir l'utiliser intelligemment.</p>
+                </div>
+            </div>
+            <div class="slide-number">3/25</div>
+        </div>
 
-            <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-            </button>
+        <!-- Slide 4: Deux principes -->
+        <div class="slide">
+            <h2>Deux Principes Fondamentaux</h2>
+            <div class="box" style="margin: 30px 0;">
+                <h3 style="color: #667eea;">Principe 1 : Transparence</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">Si vous utilisez l'IA pour créer du contenu, dites-le à vos étudiant·es. Montrez-leur comment vous l'utilisez. C'est pédagogique.</p>
+            </div>
+            <div class="box" style="margin: 30px 0;">
+                <h3 style="color: #667eea;">Principe 2 : Vérification systématique</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">L'IA invente des informations. Toujours vérifier ce qu'elle produit. Jamais utiliser un contenu généré sans le relire et le corriger.</p>
+            </div>
+            <div class="slide-number">4/25</div>
+        </div>
+
+        <!-- Slide 5: Évaluation -->
+        <div class="slide">
+            <h2>L'Évaluation en Toile de Fond</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Si vous utilisez l'IA, vos étudiant·es l'utiliseront aussi. Trois approches :</p>
+            <ul>
+                <li><span class="highlight">Approche 1</span> : Situations où l'IA aide peu<br>
+                    <span style="font-size: 0.9em; color: #666;">Exemple : oral en direct avec justification de choix visuels</span>
+                </li>
+                <li><span class="highlight">Approche 2</span> : Utilisation encadrée de l'IA<br>
+                    <span style="font-size: 0.9em; color: #666;">Exemple : documenter le processus de création avec l'IA</span>
+                </li>
+                <li><span class="highlight">Approche 3</span> : Former à l'esprit critique<br>
+                    <span style="font-size: 0.9em; color: #666;">Exemple : détecter les erreurs dans un contenu généré par IA</span>
+                </li>
+            </ul>
+            <div class="slide-number">5/25</div>
+        </div>
+
+        <!-- Slide 6: Intro NotebookLM -->
+        <div class="slide">
+            <div class="tool-section">
+                <h2>Démonstration 1 : NotebookLM</h2>
+                <p style="font-size: 1.4em; margin: 20px 0;">Google NotebookLM - Gratuit</p>
+                <div class="demo-box">
+                    <p style="font-size: 1.2em;"><strong>Fonction :</strong> Analyse vos documents et crée des contenus pédagogiques</p>
+                </div>
+                <div class="demo-box">
+                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Vous avez 5 articles scientifiques sur un sujet. Vous voulez créer un support de synthèse pour vos étudiant·es.</p>
+                </div>
+            </div>
+            <div class="slide-number">6/25</div>
+        </div>
+
+        <!-- Slide 7: NotebookLM Fonctionnalités -->
+        <div class="slide">
+            <h2>NotebookLM : Fonctionnalités</h2>
+            <ul>
+                <li><span class="highlight">Synthèse structurée</span><br>
+                    Import de 5 articles PDF → Synthèse avec thèmes, consensus, débats en 2 minutes<br>
+                    <span style="font-size: 0.9em; color: #666;">Temps gagné : 2h de lecture → 2 min + relecture</span>
+                </li>
+                <li><span class="highlight">Guide de questions</span><br>
+                    Génération de 10 questions avec 3 niveaux de difficulté automatiquement
+                </li>
+                <li><span class="highlight">Podcast pédagogique</span><br>
+                    Création audio de 2 voix IA discutant du contenu pour révision auditive
+                </li>
+                <li><span class="highlight">FAQ étudiante</span><br>
+                    Génération de questions/réponses anticipant les interrogations étudiantes
+                </li>
+            </ul>
+            <div class="slide-number">7/25</div>
+        </div>
+
+        <!-- Slide 8: NotebookLM Limites -->
+        <div class="slide">
+            <h2>NotebookLM : Limites et Vérification</h2>
+            <div class="comparison">
+                <div class="comparison-box bad">
+                    <h4>❌ Risques</h4>
+                    <ul style="list-style: disc; padding-left: 20px;">
+                        <li>Sur-interprétation des sources</li>
+                        <li>Simplification excessive</li>
+                        <li>Généralisation abusive</li>
+                    </ul>
+                </div>
+                <div class="comparison-box good">
+                    <h4>✓ Bonnes pratiques</h4>
+                    <ul style="list-style: disc; padding-left: 20px;">
+                        <li>Toujours relire attentivement</li>
+                        <li>Vérifier les citations</li>
+                        <li>Corriger les nuances perdues</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box" style="margin-top: 30px;">
+                <p style="font-size: 1.3em; color: #dc3545; font-weight: bold; text-align: center;">
+                    Règle d'or : L'IA fait gagner du temps, elle ne vous remplace pas
+                </p>
+            </div>
+            <div class="slide-number">8/25</div>
+        </div>
+
+        <!-- Slide 9: NotebookLM Évaluation -->
+        <div class="slide">
+            <h2>NotebookLM : Application Évaluation</h2>
+            <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;">
+                <h3 style="color: white; margin-bottom: 20px;">Approche 2 : Utilisation encadrée</h3>
+                <p style="font-size: 1.2em; line-height: 1.6;">
+                    Donnez aux étudiant·es un corpus d'articles. Demandez-leur d'utiliser NotebookLM pour générer une synthèse. 
+                    Puis demandez une analyse critique comparant l'output IA et leur propre lecture.
+                </p>
+            </div>
+            <h3 style="margin-top: 30px;">Vous évaluez :</h3>
+            <ul>
+                <li>Qualité des questions posées à l'IA</li>
+                <li>Capacité à identifier les limites de la synthèse IA</li>
+                <li>Analyse personnelle dépassant la machine</li>
+            </ul>
+            <div class="slide-number">9/25</div>
+        </div>
+
+        <!-- Slide 10: Intro Napkin -->
+        <div class="slide">
+            <div class="tool-section">
+                <h2>Démonstration 2 : Napkin</h2>
+                <p style="font-size: 1.4em; margin: 20px 0;">Napkin.ai - Version gratuite disponible</p>
+                <div class="demo-box">
+                    <p style="font-size: 1.2em;"><strong>Fonction :</strong> Transforme du texte en visuels pédagogiques</p>
+                </div>
+                <div class="demo-box">
+                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Vous avez un concept complexe à expliquer. Vous voulez un schéma clair.</p>
+                </div>
+            </div>
+            <div class="slide-number">10/25</div>
+        </div>
+
+        <!-- Slide 11: Napkin Types de visuels -->
+        <div class="slide">
+            <h2>Napkin : 6 Types de Visualisations</h2>
+            <div class="grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="card">
+                    <h3>Diagramme circulaire</h3>
+                    <p>Montre le cycle</p>
+                </div>
+                <div class="card">
+                    <h3>Frise chronologique</h3>
+                    <p>Montre la chronologie</p>
+                </div>
+                <div class="card">
+                    <h3>Arborescence</h3>
+                    <p>Montre les sous-étapes</p>
+                </div>
+                <div class="card">
+                    <h3>Flux</h3>
+                    <p>Montre les liens de causalité</p>
+                </div>
+                <div class="card">
+                    <h3>Carte mentale</h3>
+                    <p>Montre les connexions</p>
+                </div>
+                <div class="card">
+                    <h3>Comparaison</h3>
+                    <p>Montre les différences</p>
+                </div>
+            </div>
+            <div class="slide-number">11/25</div>
+        </div>
+
+        <!-- Slide 12: Napkin Gain de temps -->
+        <div class="slide">
+            <h2>Napkin : Gain de Temps</h2>
+            <div class="big-number">5 min</div>
+            <p style="text-align: center; font-size: 1.5em; color: #666; margin-bottom: 40px;">
+                au lieu de 30 min avec PowerPoint
+            </p>
+            <div class="comparison">
+                <div class="comparison-box bad">
+                    <h4>Sans Napkin</h4>
+                    <ul style="list-style: disc; padding-left: 20px; font-size: 1.1em;">
+                        <li>30 min de création manuelle</li>
+                        <li>Ajustements fastidieux</li>
+                        <li>Résultat parfois peu visuel</li>
+                    </ul>
+                </div>
+                <div class="comparison-box good">
+                    <h4>Avec Napkin</h4>
+                    <ul style="list-style: disc; padding-left: 20px; font-size: 1.1em;">
+                        <li>5 min chrono</li>
+                        <li>Personnalisation facile</li>
+                        <li>Rendu professionnel</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">12/25</div>
+        </div>
+
+        <!-- Slide 13: Napkin Activités -->
+        <div class="slide">
+            <h2>Napkin : Créer des Activités Étudiant·es</h2>
+            <ul>
+                <li><span class="highlight">Activité 1 : Compléter le schéma</span><br>
+                    Générez un schéma avec Napkin. Enlevez certains éléments. Les étudiant·es doivent compléter en TD.
+                </li>
+                <li><span class="highlight">Activité 2 : Comparaison de représentations</span><br>
+                    Donnez un texte aux étudiant·es. Ils/elles créent leur propre visualisation avec Napkin. Discussion en classe sur les différentes représentations.
+                </li>
+                <li><span class="highlight">Activité 3 : Justification des choix</span><br>
+                    Les étudiant·es doivent expliquer pourquoi tel schéma marche mieux que tel autre pour un concept donné.
+                </li>
+            </ul>
+            <div class="slide-number">13/25</div>
+        </div>
+
+        <!-- Slide 14: Napkin Évaluation -->
+        <div class="slide">
+            <h2>Napkin : Application Évaluation</h2>
+            <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;">
+                <h3 style="color: white; margin-bottom: 20px;">Approche 1 : IA-résistant</h3>
+                <p style="font-size: 1.2em; line-height: 1.6;">
+                    Oral d'examen. L'étudiant·e prépare une présentation avec visuels Napkin. 
+                    Vous posez des questions : "Pourquoi ce type de schéma ? Explique ce lien. Justifie cette organisation."
+                </p>
+            </div>
+            <h3 style="margin-top: 30px;">Vous évaluez :</h3>
+            <ul>
+                <li>Capacité à justifier des choix visuels</li>
+                <li>Compréhension approfondie du concept</li>
+                <li>Communication synchrone irremplaçable par l'IA</li>
+            </ul>
+            <div class="slide-number">14/25</div>
+        </div>
+
+        <!-- Slide 15: Intro AI Studio -->
+        <div class="slide">
+            <div class="tool-section">
+                <h2>Démonstration 3 : AI Studio</h2>
+                <p style="font-size: 1.4em; margin: 20px 0;">Google AI Studio - Gratuit</p>
+                <div class="demo-box">
+                    <p style="font-size: 1.2em;"><strong>Fonction :</strong> Analyse multimodale (texte, images, vidéos simultanément)</p>
+                </div>
+                <div class="demo-box">
+                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Créer des supports pédagogiques riches et former à l'esprit critique</p>
+                </div>
+            </div>
+            <div class="slide-number">15/25</div>
+        </div>
+
+        <!-- Slide 16: AI Studio Fonctionnalités -->
+        <div class="slide">
+            <h2>AI Studio : Fonctionnalités Multimodales</h2>
+            <ul>
+                <li><span class="highlight">Analyser une vidéo pédagogique</span><br>
+                    Résumé structuré d'une vidéo de 10 min avec concepts clés et timestamps
+                </li>
+                <li><span class="highlight">Créer des quiz à partir de documents</span><br>
+                    10 questions QCM basées sur PDF + images en quelques minutes
+                </li>
+                <li><span class="highlight">Analyser des productions étudiantes</span><br>
+                    Rapport PDF + vidéo de présentation analysés simultanément
+                </li>
+                <li><span class="highlight">Vérifier la cohérence de contenus</span><br>
+                    Identification des contradictions dans un polycopié de 20 pages
+                </li>
+            </ul>
+            <div class="slide-number">16/25</div>
+        </div>
+
+        <!-- Slide 17: AI Studio Esprit critique -->
+        <div class="slide">
+            <h2>AI Studio : Former à l'Esprit Critique</h2>
+            <div class="box" style="margin: 30px 0; padding: 30px;">
+                <h3>Exercice de détection d'erreurs</h3>
+                <p style="font-size: 1.2em; margin-top: 15px;">
+                    Demandez à AI Studio : "Écris un texte de 300 mots sur la photosynthèse, mais inclus volontairement 3 erreurs subtiles."
+                </p>
+            </div>
+            <h3>Utilisation pédagogique :</h3>
+            <ul>
+                <li>Donnez le texte généré aux étudiant·es en TD</li>
+                <li>Ils/elles doivent trouver les 3 erreurs</li>
+                <li>Discussion sur comment ils/elles les ont repérées</li>
+                <li>Formation à la vérification systématique</li>
+            </ul>
+            <div class="slide-number">17/25</div>
+        </div>
+
+        <!-- Slide 18: AI Studio Gain -->
+        <div class="slide">
+            <h2>AI Studio : Gains de Temps</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Quiz</h3>
+                    <p class="big-number" style="font-size: 3em; margin: 20px 0;">60%</p>
+                    <p>de temps gagné sur création d'exercices</p>
+                </div>
+                <div class="card">
+                    <h3>Analyse</h3>
+                    <p class="big-number" style="font-size: 3em; margin: 20px 0;">70%</p>
+                    <p>de temps gagné sur analyse de productions</p>
+                </div>
+                <div class="card">
+                    <h3>Vérification</h3>
+                    <p class="big-number" style="font-size: 3em; margin: 20px 0;">50%</p>
+                    <p>de temps gagné sur relecture de contenus</p>
+                </div>
+            </div>
+            <div class="slide-number">18/25</div>
+        </div>
+
+        <!-- Slide 19: AI Studio Évaluation -->
+        <div class="slide">
+            <h2>AI Studio : Application Évaluation</h2>
+            <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;">
+                <h3 style="color: white; margin-bottom: 20px;">Approche 3 : Formation à l'esprit critique</h3>
+                <p style="font-size: 1.2em; line-height: 1.6;">
+                    Donner des textes générés par IA avec des erreurs cachées. 
+                    Les étudiant·es doivent les détecter et les corriger.
+                </p>
+            </div>
+            <h3 style="margin-top: 30px;">Vous évaluez :</h3>
+            <ul>
+                <li>Capacité à identifier les hallucinations</li>
+                <li>Capacité à vérifier les informations</li>
+                <li>Esprit critique face aux outputs IA</li>
+            </ul>
+            <p style="font-size: 1.3em; margin-top: 30px; color: #667eea; font-weight: bold;">
+                → Formez vos étudiant·es à devenir plus intelligent·es que la machine
+            </p>
+            <div class="slide-number">19/25</div>
+        </div>
+
+        <!-- Slide 20: Récapitulatif outils -->
+        <div class="slide">
+            <h2>Récapitulatif des 3 Outils</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>NotebookLM</h3>
+                    <p><strong>Fonction :</strong> Analyser documents, créer synthèses, FAQ, podcasts</p>
+                    <p style="margin-top: 15px;"><strong>Temps gagné :</strong> 80% sur synthèse documentaire</p>
+                </div>
+                <div class="card">
+                    <h3>Napkin</h3>
+                    <p><strong>Fonction :</strong> Transformer texte en visuels pédagogiques</p>
+                    <p style="margin-top: 15px;"><strong>Temps gagné :</strong> 70% sur création de schémas</p>
+                </div>
+                <div class="card">
+                    <h3>AI Studio</h3>
+                    <p><strong>Fonction :</strong> Analyse multimodale, création quiz, esprit critique</p>
+                    <p style="margin-top: 15px;"><strong>Temps gagné :</strong> 60% sur création exercices</p>
+                </div>
+            </div>
+            <div class="box" style="margin-top: 30px;">
+                <p style="font-size: 1.3em; text-align: center; color: #28a745; font-weight: bold;">
+                    Ces trois outils sont gratuits ou ont des versions gratuites suffisantes
+                </p>
+            </div>
+            <div class="slide-number">20/25</div>
+        </div>
+
+        <!-- Slide 21: Open source -->
+        <div class="slide">
+            <h2>Alternatives Open Source</h2>
+            <div class="comparison">
+                <div class="comparison-box bad">
+                    <h4>⚠ Outils propriétaires</h4>
+                    <p style="margin: 15px 0;">NotebookLM, Napkin, AI Studio</p>
+                    <ul style="list-style: disc; padding-left: 20px;">
+                        <li>Vos données vont chez Google</li>
+                        <li>Dépendance aux plateformes</li>
+                        <li>Confidentialité limitée</li>
+                    </ul>
+                </div>
+                <div class="comparison-box good">
+                    <h4>✓ Alternatives libres</h4>
+                    <p style="margin: 15px 0;"><strong>Mistral :</strong> LLM français, hébergeable localement</p>
+                    <p style="margin: 15px 0;"><strong>Llama :</strong> Open source Meta, personnalisable</p>
+                    <ul style="list-style: disc; padding-left: 20px;">
+                        <li>Contrôle de vos données</li>
+                        <li>Hébergement local possible</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box" style="margin-top: 20px;">
+                <p style="font-size: 1.1em;">Inconvénient : plus complexe techniquement à mettre en place</p>
+            </div>
+            <div class="slide-number">21/25</div>
+        </div>
+
+        <!-- Slide 22: Trois approches évaluatives -->
+        <div class="slide">
+            <h2>Les Trois Approches Évaluatives</h2>
+            <ul>
+                <li><span class="highlight">Approche 1 : Situations IA-résistantes</span><br>
+                    Napkin + oral en direct. L'IA aide à préparer, mais l'évaluation reste humaine et synchrone.
+                </li>
+                <li><span class="highlight">Approche 2 : Utilisation documentée</span><br>
+                    NotebookLM avec documentation du processus. On évalue le chemin autant que le résultat.
+                </li>
+                <li><span class="highlight">Approche 3 : Formation à l'esprit critique</span><br>
+                    AI Studio pour créer des exercices de détection d'erreurs. L'IA devient objet d'apprentissage.
+                </li>
+            </ul>
+            <div class="box" style="margin-top: 30px;">
+                <p style="font-size: 1.3em; text-align: center; font-weight: bold;">
+                    Diversifier les évaluations pour capturer l'apprentissage réel
+                </p>
+            </div>
+            <div class="slide-number">22/25</div>
+        </div>
+
+        <!-- Slide 23: Ressources -->
+        <div class="slide">
+            <h2>Ressources Complètes</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Bonnes Pratiques</h3>
+                    <p style="font-size: 1.3em; margin: 20px 0;">ia-guidebp.rochane.fr</p>
+                </div>
+                <div class="card">
+                    <h3>Esprit Critique</h3>
+                    <p style="font-size: 1.3em; margin: 20px 0;">ia-critique.rochane.fr</p>
+                </div>
+                <div class="card">
+                    <h3>Évaluation</h3>
+                    <p style="font-size: 1.3em; margin: 20px 0;">ia-evaluation.rochane.fr</p>
+                </div>
+            </div>
+            <div class="slide-number">23/25</div>
+        </div>
+
+        <!-- Slide 24: Message final -->
+        <div class="slide">
+            <h2>Message Final</h2>
+            <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; margin: 40px 0;">
+                <p style="font-size: 1.6em; line-height: 1.6; text-align: center;">
+                    L'IA ne remplace pas l'enseignant·e.<br><br>
+                    Elle vous libère du temps pour ce qui compte vraiment :<br>
+                    <strong>l'accompagnement pédagogique</strong>
+                </p>
+            </div>
+            <div class="slide-number">24/25</div>
+        </div>
+
+        <!-- Slide 25: Questions -->
+        <div class="slide">
+            <h1 style="text-align: center; font-size: 4em;">Questions ?</h1>
+            <p style="text-align: center; font-size: 1.8em; color: #666; margin-top: 40px;">
+                Vos questions maintenant
+            </p>
+            <div class="box" style="margin-top: 60px;">
+                <p style="font-size: 1.2em; text-align: center;">
+                    Contact : rochane.kherbouche@univ-lille.fr
+                </p>
+            </div>
+            <div class="slide-number">25/25</div>
         </div>
     </div>
 
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
+        <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+    </div>
+
     <script>
-        const slidesData = [
-            // SLIDE 1
-            {
-                section: "",
-                title: "Outils IA pour l'enseignement supérieur",
-                subtitle: "Des solutions concrètes à vos problèmes quotidiens",
-                timing: "0:00-0:05",
-                content: `
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <div style="width: 8rem; height: 8rem; background: #eef2ff; border-radius: 50%; margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; font-size: 4rem;">
-                            🛠️
-                        </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Rochane Kherbouche</h3>
-                        <p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 0.5rem;">Technopédagogue - Université de Lille</p>
-                        <p style="color: #9ca3af;">Innovation et services e-learning</p>
-                    </div>
-                    <div class="card card-indigo" style="margin-top: 2rem;">
-                        <p class="font-semibold mb-4" style="font-size: 1.125rem; color: #4338ca;">Programme</p>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="padding: 0.5rem 0;">• 4 outils concrets et utilisables dès demain</li>
-                            <li style="padding: 0.5rem 0;">• 3 infographies pour contextualiser vos usages</li>
-                            <li style="padding: 0.5rem 0;">• Des démonstrations en direct</li>
-                            <li style="padding: 0.5rem 0;">• 30 min pour vos questions</li>
-                        </ul>
-                    </div>
-                `
-            },
-            // SLIDE 2
-            {
-                section: "",
-                title: "4 problèmes, 4 solutions",
-                subtitle: "Une progression du simple au sophistiqué",
-                timing: "0:05-0:07",
-                content: `
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div class="card card-red">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <span style="font-size: 1.5rem;">⚠️</span>
-                                <p class="font-bold" style="color: #991b1b;">Problème 1</p>
-                            </div>
-                            <p style="color: #374151; margin-bottom: 0.5rem;">"Je perds des heures à synthétiser des articles"</p>
-                            <p class="text-sm" style="color: #15803d;">→ Solution : <strong>NotebookLM</strong></p>
-                        </div>
-                        
-                        <div class="card card-orange">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <span style="font-size: 1.5rem;">⚠️</span>
-                                <p class="font-bold" style="color: #9a3412;">Problème 2</p>
-                            </div>
-                            <p style="color: #374151; margin-bottom: 0.5rem;">"Mes concepts abstraits ne passent pas"</p>
-                            <p class="text-sm" style="color: #15803d;">→ Solution : <strong>Napkin</strong></p>
-                        </div>
-                        
-                        <div class="card card-blue">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <span style="font-size: 1.5rem;">⚠️</span>
-                                <p class="font-bold" style="color: #1e40af;">Problème 3</p>
-                            </div>
-                            <p style="color: #374151; margin-bottom: 0.5rem;">"Je veux des outils personnalisés pour mes cours"</p>
-                            <p class="text-sm" style="color: #15803d;">→ Solution : <strong>Google AI Studio</strong></p>
-                        </div>
-                        
-                        <div class="card card-purple">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                                <span style="font-size: 1.5rem;">⚠️</span>
-                                <p class="font-bold" style="color: #6b21a8;">Problème 4</p>
-                            </div>
-                            <p style="color: #374151; margin-bottom: 0.5rem;">"Je ne veux pas dépendre de Google/OpenAI"</p>
-                            <p class="text-sm" style="color: #15803d;">→ Solution : <strong>Outils open source</strong></p>
-                        </div>
-                    </div>
-                `
-            },
-            // SLIDE 3 - Problème 1
-            {
-                section: "PROBLÈME 1",
-                title: "Je perds des heures à synthétiser",
-                subtitle: "Le syndrome de la pile d'articles",
-                timing: "0:07-0:09",
-                content: `
-                    <div class="card card-red" style="padding: 2rem; margin-bottom: 1.5rem;">
-                        <div style="text-align: center; font-size: 5rem; margin: 1rem 0;">📚</div>
-                        <p style="font-size: 1.5rem; font-weight: 700; text-align: center; color: #991b1b; margin-bottom: 1.5rem;">La situation</p>
-                        <ul style="list-style: none; padding: 0; font-size: 1.125rem;">
-                            <li style="padding: 0.75rem 0;">📚 Vous avez 5 articles scientifiques à analyser</li>
-                            <li style="padding: 0.75rem 0;">⏰ Temps de lecture : 3 heures minimum</li>
-                            <li style="padding: 0.75rem 0;">✍️ Temps de synthèse : 2 heures</li>
-                            <li style="padding: 0.75rem 0;">😫 Résultat : 5 heures de travail répétitif</li>
-                        </ul>
-                    </div>
-                    <div class="card card-yellow" style="padding: 1.5rem;">
-                        <p class="text-center" style="font-size: 1.25rem; font-weight: 600;">
-                            Et si vous pouviez réduire ce temps à 30 minutes ?
-                        </p>
-                    </div>
-                `
-            },
-            // SLIDE 4 - Solution NotebookLM
-            {
-                section: "SOLUTION 1",
-                title: "NotebookLM",
-                subtitle: "Votre assistant d'analyse documentaire",
-                timing: "0:09-0:10",
-                content: `
-                    <div class="card card-green" style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <span style="font-size: 3rem;">💡</span>
-                            <div>
-                                <p style="font-size: 1.25rem; font-weight: 700; color: #15803d;">NotebookLM (Google)</p>
-                                <p class="text-sm" style="color: #6b7280;">Gratuit • Analyse multi-documents</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="grid-2">
-                        <div style="background: white; border: 1px solid #e5e7eb; padding: 1.5rem; border-radius: 8px;">
-                            <p class="font-bold mb-4">Ce qu'il fait</p>
-                            <ul class="text-sm" style="list-style: none; padding: 0;">
-                                <li style="padding: 0.25rem 0;">✓ Analyse plusieurs documents simultanément</li>
-                                <li style="padding: 0.25rem 0;">✓ Répond à vos questions avec citations</li>
-                                <li style="padding: 0.25rem 0;">✓ Crée des synthèses structurées</li>
-                                <li style="padding: 0.25rem 0;">✓ Génère des podcasts audio automatiques</li>
-                                <li style="padding: 0.25rem 0;">✓ Propose des FAQ pour étudiants</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: white; border: 1px solid #e5e7eb; padding: 1.5rem; border-radius: 8px;">
-                            <p class="font-bold mb-4">Gain de temps</p>
-                            <div class="text-center">
-                                <div style="margin: 1rem 0;">
-                                    <p style="font-size: 2.5rem; font-weight: 700; color: #dc2626;">5h</p>
-                                    <p class="text-sm" style="color: #6b7280;">Avant</p>
-                                </div>
-                                <div style="font-size: 2rem; color: #9ca3af;">↓</div>
-                                <div style="margin: 1rem 0;">
-                                    <p style="font-size: 2.5rem; font-weight: 700; color: #16a34a;">30min</p>
-                                    <p class="text-sm" style="color: #6b7280;">Après</p>
-                                </div>
-                                <p style="font-size: 1.125rem; font-weight: 600; color: #4f46e5;">80% de temps gagné</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            // Continuer avec toutes les autres slides...
-            // Pour ne pas dépasser la limite, je vais créer un template générique pour les slides manquantes
-            ...Array.from({length: 40}, (_, i) => ({
-                section: `SECTION ${i + 5}`,
-                title: `Slide ${i + 5}`,
-                subtitle: "Contenu à venir",
-                timing: "XX:XX",
-                content: `
-                    <div class="card card-blue">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Slide ${i + 5}</h3>
-                        <p>Cette slide sera complétée avec le contenu détaillé de la présentation.</p>
-                        <p style="margin-top: 1rem; color: #6b7280;">Navigation : Utilisez les flèches ou le clavier pour naviguer.</p>
-                    </div>
-                `
-            }))
-        ];
-
         let currentSlide = 0;
-        const totalSlides = slidesData.length;
+        let startTime = Date.now();
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
 
-        function createSlide(data, index) {
-            return `
-                <div class="slide ${index === 0 ? 'active' : ''}" data-slide="${index}">
-                    <div class="slide-header">
-                        ${data.section ? `<div class="slide-section">${data.section}</div>` : ''}
-                        <h1 class="slide-title">${data.title}</h1>
-                        ${data.subtitle ? `<p class="slide-subtitle">${data.subtitle}</p>` : ''}
-                        ${data.timing ? `<div class="slide-timing">⏱ ${data.timing}</div>` : ''}
-                    </div>
-                    <div class="slide-content">
-                        ${data.content}
-                    </div>
-                </div>
-            `;
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.querySelector('.timer').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
 
-        function initPresentation() {
-            const wrapper = document.getElementById('slideWrapper');
-            const slidesHTML = slidesData.map((data, index) => createSlide(data, index)).join('');
-            wrapper.innerHTML = slidesHTML + '<div class="slide-counter" id="slideCounter">1 / ' + totalSlides + '</div>';
+        setInterval(updateTimer, 1000);
 
-            const dotsContainer = document.getElementById('progressDots');
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'progress-dot';
-                if (i === 0) dot.classList.add('active');
-                dot.onclick = () => goToSlide(i);
-                dotsContainer.appendChild(dot);
-            }
-            updateNavigation();
-        }
-
-        function changeSlide(direction) {
-            const newSlide = currentSlide + direction;
-            if (newSlide >= 0 && newSlide < totalSlides) {
-                goToSlide(newSlide);
-            }
-        }
-
-        function goToSlide(index) {
-            const slides = document.querySelectorAll('.slide');
+        function showSlide(n) {
             slides[currentSlide].classList.remove('active');
-            currentSlide = index;
+            currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
-            updateNavigation();
         }
 
-        function updateNavigation() {
-            document.getElementById('prevBtn').disabled = currentSlide === 0;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
 
-            const dots = document.querySelectorAll('.progress-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-
-            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        function previousSlide() {
+            showSlide(currentSlide - 1);
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
         });
 
-        initPresentation();
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                previousSlide();
+            }
+        }
     </script>
 </body>
 </html>
