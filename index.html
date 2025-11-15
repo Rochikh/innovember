@@ -308,6 +308,11 @@
             color: #667eea;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
+
+        /* Masquer les consignes formateur·ice */
+        .trainer-notes {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -317,7 +322,7 @@
         <!-- Slide 1: Titre -->
         <div class="slide active">
             <h1>IA Générative en Pédagogie</h1>
-            <p class="subtitle">Créer vos contenus pédagogiques avec l'IA</p>
+            <p class="subtitle">Créer tes contenus pédagogiques avec l'IA</p>
             <div class="box">
                 <p style="font-size: 1.3em; color: #333;">90 minutes de démonstrations concrètes</p>
                 <p style="font-size: 1.1em; color: #666; margin-top: 10px;">Pas de théorie abstraite. Des outils utilisables dès demain.</p>
@@ -365,7 +370,7 @@
                 </div>
                 <div class="card">
                     <h3>2. Étudiant·es déjà utilisateur·ices</h3>
-                    <p>200M d'utilisateur·ices ChatGPT. Vos étudiant·es l'utilisent. Autant leur montrer comment bien l'utiliser.</p>
+                    <p>200M d'utilisateur·ices ChatGPT. Tes étudiant·es l'utilisent. Autant leur montrer comment bien l'utiliser.</p>
                 </div>
                 <div class="card">
                     <h3>3. IA non magique</h3>
@@ -380,7 +385,7 @@
             <h2>Deux Principes Fondamentaux</h2>
             <div class="box" style="margin: 30px 0;">
                 <h3 style="color: #667eea;">Principe 1 : Transparence</h3>
-                <p style="font-size: 1.2em; margin-top: 15px;">Si vous utilisez l'IA pour créer du contenu, dites-le à vos étudiant·es. Montrez-leur comment vous l'utilisez. C'est pédagogique.</p>
+                <p style="font-size: 1.2em; margin-top: 15px;">Si tu utilises l'IA pour créer du contenu, dis-le à tes étudiant·es. Montre-leur comment tu l'utilises. C'est pédagogique.</p>
             </div>
             <div class="box" style="margin: 30px 0;">
                 <h3 style="color: #667eea;">Principe 2 : Vérification systématique</h3>
@@ -392,7 +397,7 @@
         <!-- Slide 5: Évaluation -->
         <div class="slide">
             <h2>L'Évaluation en Toile de Fond</h2>
-            <p style="font-size: 1.2em; margin-bottom: 30px;">Si vous utilisez l'IA, vos étudiant·es l'utiliseront aussi. Trois approches :</p>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Si tu utilises l'IA, tes étudiant·es l'utiliseront aussi. Trois approches :</p>
             <ul>
                 <li><span class="highlight">Approche 1</span> : Situations où l'IA aide peu<br>
                     <span style="font-size: 0.9em; color: #666;">Exemple : oral en direct avec justification de choix visuels</span>
@@ -413,10 +418,10 @@
                 <h2>Démonstration 1 : NotebookLM</h2>
                 <p style="font-size: 1.4em; margin: 20px 0;">Google NotebookLM - Gratuit</p>
                 <div class="demo-box">
-                    <p style="font-size: 1.2em;"><strong>Fonction :</strong> Analyse vos documents et crée des contenus pédagogiques</p>
+                    <p style="font-size: 1.2em;"><strong>Fonction :</strong> Analyse tes documents et crée des contenus pédagogiques</p>
                 </div>
                 <div class="demo-box">
-                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Vous avez 5 articles scientifiques sur un sujet. Vous voulez créer un support de synthèse pour vos étudiant·es.</p>
+                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Tu as 5 articles scientifiques sur un sujet. Tu veux créer un support de synthèse pour tes étudiant·es.</p>
                 </div>
             </div>
             <div class="slide-number">6/28</div>
@@ -428,7 +433,7 @@
                 <div style="text-align: center;">
                     <h1 style="font-size: 5em; color: #667eea; margin-bottom: 30px;">🎬 DÉMO LIVE</h1>
                     <h2 style="color: #764ba2; border: none;">NotebookLM en action</h2>
-                    <div style="margin-top: 50px;">
+                    <div style="margin-top: 50px;" class="trainer-notes">
                         <div class="box" style="display: inline-block; padding: 20px 40px; font-size: 1.3em;">
                             <p><strong>À démontrer :</strong></p>
                             <p style="margin-top: 10px;">1. Import de documents<br>
@@ -486,7 +491,7 @@
             </div>
             <div class="box" style="margin-top: 30px;">
                 <p style="font-size: 1.3em; color: #dc3545; font-weight: bold; text-align: center;">
-                    Règle d'or : L'IA fait gagner du temps, elle ne vous remplace pas
+                    Règle d'or : L'IA fait gagner du temps, elle ne te remplace pas
                 </p>
             </div>
             <div class="slide-number">9/28</div>
@@ -498,11 +503,11 @@
             <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;">
                 <h3 style="color: white; margin-bottom: 20px;">Approche 2 : Utilisation encadrée</h3>
                 <p style="font-size: 1.2em; line-height: 1.6;">
-                    Donnez aux étudiant·es un corpus d'articles. Demandez-leur d'utiliser NotebookLM pour générer une synthèse. 
-                    Puis demandez une analyse critique comparant l'output IA et leur propre lecture.
+                    Donne aux étudiant·es un corpus d'articles. Demande-leur d'utiliser NotebookLM pour générer une synthèse.
+                    Puis demande une analyse critique comparant l'output IA et leur propre lecture.
                 </p>
             </div>
-            <h3 style="margin-top: 30px;">Vous évaluez :</h3>
+            <h3 style="margin-top: 30px;">Tu évalues :</h3>
             <ul>
                 <li>Qualité des questions posées à l'IA</li>
                 <li>Capacité à identifier les limites de la synthèse IA</li>
@@ -520,7 +525,7 @@
                     <p style="font-size: 1.2em;"><strong>Fonction :</strong> Transforme du texte en visuels pédagogiques</p>
                 </div>
                 <div class="demo-box">
-                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Vous avez un concept complexe à expliquer. Vous voulez un schéma clair.</p>
+                    <p style="font-size: 1.2em;"><strong>Cas pratique :</strong> Tu as un concept complexe à expliquer. Tu veux un schéma clair.</p>
                 </div>
             </div>
             <div class="slide-number">11/28</div>
@@ -532,7 +537,7 @@
                 <div style="text-align: center;">
                     <h1 style="font-size: 5em; color: #667eea; margin-bottom: 30px;">🎬 DÉMO LIVE</h1>
                     <h2 style="color: #764ba2; border: none;">Napkin en action</h2>
-                    <div style="margin-top: 50px;">
+                    <div style="margin-top: 50px;" class="trainer-notes">
                         <div class="box" style="display: inline-block; padding: 20px 40px; font-size: 1.3em;">
                             <p><strong>À démontrer :</strong></p>
                             <p style="margin-top: 10px;">1. Import de texte<br>
@@ -611,10 +616,10 @@
             <h2>📋 Napkin : Créer des Activités Étudiant·es</h2>
             <ul>
                 <li><span class="highlight">Activité 1 : Compléter le schéma</span><br>
-                    Générez un schéma avec Napkin. Enlevez certains éléments. Les étudiant·es doivent compléter en TD.
+                    Génère un schéma avec Napkin. Enlève certains éléments. Les étudiant·es doivent compléter en TD.
                 </li>
                 <li><span class="highlight">Activité 2 : Comparaison de représentations</span><br>
-                    Donnez un texte aux étudiant·es. Ils/elles créent leur propre visualisation avec Napkin. Discussion en classe sur les différentes représentations.
+                    Donne un texte aux étudiant·es. Ils/elles créent leur propre visualisation avec Napkin. Discussion en classe sur les différentes représentations.
                 </li>
                 <li><span class="highlight">Activité 3 : Justification des choix</span><br>
                     Les étudiant·es doivent expliquer pourquoi tel schéma marche mieux que tel autre pour un concept donné.
@@ -630,10 +635,10 @@
                 <h3 style="color: white; margin-bottom: 20px;">Approche 1 : IA-résistant</h3>
                 <p style="font-size: 1.2em; line-height: 1.6;">
                     Oral d'examen. L'étudiant·e prépare une présentation avec visuels Napkin. 
-                    Vous posez des questions : "Pourquoi ce type de schéma ? Explique ce lien. Justifie cette organisation."
+                    Tu poses des questions : "Pourquoi ce type de schéma ? Explique ce lien. Justifie cette organisation."
                 </p>
             </div>
-            <h3 style="margin-top: 30px;">Vous évaluez :</h3>
+            <h3 style="margin-top: 30px;">Tu évalues :</h3>
             <ul>
                 <li>Capacité à justifier des choix visuels</li>
                 <li>Compréhension approfondie du concept</li>
@@ -663,7 +668,7 @@
                 <div style="text-align: center;">
                     <h1 style="font-size: 5em; color: #667eea; margin-bottom: 30px;">🎬 DÉMO LIVE</h1>
                     <h2 style="color: #764ba2; border: none;">AI Studio en action</h2>
-                    <div style="margin-top: 50px;">
+                    <div style="margin-top: 50px;" class="trainer-notes">
                         <div class="box" style="display: inline-block; padding: 20px 40px; font-size: 1.3em;">
                             <p><strong>À démontrer :</strong></p>
                             <p style="margin-top: 10px;">1. Analyser une vidéo pédagogique<br>
@@ -703,12 +708,12 @@
             <div class="box" style="margin: 30px 0; padding: 30px;">
                 <h3>Exercice de détection d'erreurs</h3>
                 <p style="font-size: 1.2em; margin-top: 15px;">
-                    Demandez à AI Studio : "Écris un texte de 300 mots sur la photosynthèse, mais inclus volontairement 3 erreurs subtiles."
+                    Demande à AI Studio : "Écris un texte de 300 mots sur la photosynthèse, mais inclus volontairement 3 erreurs subtiles."
                 </p>
             </div>
             <h3>Utilisation pédagogique :</h3>
             <ul>
-                <li>Donnez le texte généré aux étudiant·es en TD</li>
+                <li>Donne le texte généré aux étudiant·es en TD</li>
                 <li>Ils/elles doivent trouver les 3 erreurs</li>
                 <li>Discussion sur comment ils/elles les ont repérées</li>
                 <li>Formation à la vérification systématique</li>
@@ -749,14 +754,14 @@
                     Les étudiant·es doivent les détecter et les corriger.
                 </p>
             </div>
-            <h3 style="margin-top: 30px;">Vous évaluez :</h3>
+            <h3 style="margin-top: 30px;">Tu évalues :</h3>
             <ul>
                 <li>Capacité à identifier les hallucinations</li>
                 <li>Capacité à vérifier les informations</li>
                 <li>Esprit critique face aux outputs IA</li>
             </ul>
             <p style="font-size: 1.3em; margin-top: 30px; color: #667eea; font-weight: bold;">
-                → Formez vos étudiant·es à devenir plus intelligent·es que la machine
+                → Forme tes étudiant·es à devenir plus intelligent·es que la machine
             </p>
             <div class="slide-number">22/28</div>
         </div>
@@ -797,7 +802,7 @@
                     <h4>⚠ Outils propriétaires</h4>
                     <p style="margin: 15px 0;">NotebookLM, Napkin, AI Studio</p>
                     <ul style="list-style: disc; padding-left: 20px;">
-                        <li>Vos données vont chez Google</li>
+                        <li>Tes données vont chez Google</li>
                         <li>Dépendance aux plateformes</li>
                         <li>Confidentialité limitée</li>
                     </ul>
@@ -807,7 +812,7 @@
                     <p style="margin: 15px 0;"><strong>Mistral :</strong> LLM français, hébergeable localement</p>
                     <p style="margin: 15px 0;"><strong>Llama :</strong> Open source Meta, personnalisable</p>
                     <ul style="list-style: disc; padding-left: 20px;">
-                        <li>Contrôle de vos données</li>
+                        <li>Contrôle de tes données</li>
                         <li>Hébergement local possible</li>
                     </ul>
                 </div>
@@ -866,7 +871,7 @@
             <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; margin: 40px 0;">
                 <p style="font-size: 1.6em; line-height: 1.6; text-align: center;">
                     L'IA ne remplace pas l'enseignant·e.<br><br>
-                    Elle vous libère du temps pour ce qui compte vraiment :<br>
+                    Elle te libère du temps pour ce qui compte vraiment :<br>
                     <strong>l'accompagnement pédagogique</strong>
                 </p>
             </div>
@@ -877,7 +882,7 @@
         <div class="slide">
             <h1 style="text-align: center; font-size: 4em;">Questions ?</h1>
             <p style="text-align: center; font-size: 1.8em; color: #666; margin-top: 40px;">
-                Vos questions maintenant
+                Tes questions maintenant
             </p>
             <div class="box" style="margin-top: 60px;">
                 <p style="font-size: 1.2em; text-align: center;">
